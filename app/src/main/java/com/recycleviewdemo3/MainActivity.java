@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
     private MyAdapter adapter;
 
-    private int refreshTime = 0;
-    private int times = 0;
+    private int height = 640;// 滑动开始变色的高,真实项目中此高度是由广告轮播或其他首页view高度决定
+    private int overallXScroll = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         x.view().inject(this);
 
         xrecyclerview = (XRecyclerView) findViewById(R.id.xrecyclerview);
-        //recyclerview = (RecyclerView) findViewById(R.id.recyclerview);
 
         adapter = new MyAdapter(list, this);
         xrecyclerview.setAdapter(adapter);
@@ -50,23 +49,26 @@ public class MainActivity extends AppCompatActivity {
         StaggeredGridLayoutManager manger = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
         xrecyclerview.setLayoutManager(manger);
 
+        //自定义分割线
+        xrecyclerview.addItemDecoration(new ItemDecoration(MainActivity.this));
+
         xrecyclerview.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                //刷新数据在这里
+                //刷新数据在这
                 xrecyclerview.refreshComplete();
                 initView();
+                adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onLoadMore() {
                 //负载更这里数据
-
                 xrecyclerview.loadMoreComplete();
-                //initView();
+                initView();
+                adapter.notifyDataSetChanged();
             }
         });
-
     }
 
     public boolean isNetworkAvailable(Context context) {
@@ -126,4 +128,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 }

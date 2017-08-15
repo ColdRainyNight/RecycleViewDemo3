@@ -1,5 +1,6 @@
 package com.recycleviewdemo3;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -39,6 +40,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         Data.美女Bean d = list.get(position);
         Glide.with(mContext).load(d.getImg()).into(holder.image_item);
+
+        ObjectAnimator anim = ObjectAnimator
+                .ofFloat(holder.itemView, "alpha", 0.0F, 1.0F)
+                .setDuration(1000);
+        anim.start();
     }
 
     @Override
@@ -57,7 +63,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             image_item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(mContext, "点击当前"+itemView, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "点击当前" + itemView, Toast.LENGTH_SHORT).show();
                 }
             });
         }
