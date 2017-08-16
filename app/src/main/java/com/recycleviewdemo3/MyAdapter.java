@@ -43,7 +43,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         ObjectAnimator anim = ObjectAnimator
                 .ofFloat(holder.itemView, "alpha", 0.0F, 1.0F)
-                .setDuration(1000);
+                .setDuration(2000);
         anim.start();
     }
 

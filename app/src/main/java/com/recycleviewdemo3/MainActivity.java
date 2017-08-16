@@ -46,6 +46,16 @@ public class MainActivity extends AppCompatActivity {
         xrecyclerview.setAdapter(adapter);
         initView();
 
+        //线性布局
+//        LinearLayoutManager manager1 = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+//        xrecyclerview.setLayoutManager(manager1);
+
+        //网格布局
+//        GridLayoutManager manager2 = new GridLayoutManager(this,2,GridLayoutManager.VERTICAL,false);
+//        xrecyclerview.setLayoutManager(manager2);
+
+
+        //瀑布流
         StaggeredGridLayoutManager manger = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
         xrecyclerview.setLayoutManager(manger);
 
@@ -58,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                 //刷新数据在这
                 xrecyclerview.refreshComplete();
                 initView();
-                adapter.notifyDataSetChanged();
+               adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -66,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 //负载更这里数据
                 xrecyclerview.loadMoreComplete();
                 initView();
-                adapter.notifyDataSetChanged();
+                //adapter.notifyDataSetChanged();
             }
         });
     }
